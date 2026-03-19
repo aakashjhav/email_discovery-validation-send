@@ -42,6 +42,38 @@ async function submitEmployees() {
   console.log(employeeNameListArray);
 }
 
+/////#2 - specifc thing  name submission/////
+
+const generateSpecificThingBtn = document.getElementById(
+  "generateSpecificThingBtn",
+);
+generateSpecificThingBtn.addEventListener("click", sendSpecificThing);
+
+async function sendSpecificThing() {
+  const specificThing = document.getElementById("specificThing");
+  const specificThingValue = specificThing.value;
+  console.log(specificThingValue);
+  const body = {
+    companyAbout: specificThingValue,
+  };
+
+  const response = await fetch("/generateSpecifcThingOpenAi", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  const result = await response.json();
+  console.log(result);
+  let SpecificThingResponseMessagValue = document.getElementById(
+    "SpecificThingResponseMessage",
+  );
+  SpecificThingResponseMessagValue.textContent = result;
+}
+
 /////#2 - email  name submission/////
 
 const submiteemail = document.getElementById("submiteemail");

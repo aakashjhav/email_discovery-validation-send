@@ -40,16 +40,44 @@ Do not include explanations or suggestions.`;
     res.json({ answer: result.text });
   } catch (error) {
     console.error(error.message);
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
+
+///////////////#2- SpecifcThing- openAi/////////////
+
+const clientOpenAiSpecificThing = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY?.replace(/\s+/g, ""),
+});
+
+app.post("/generateSpecifcThingOpenAi", async (req, res) => {
+  try {
+    const aboutCompany = req.body.companyAbout;
+
+    const prompt = `${aboutCompany} based ont the this about us of a company. i am doing reachouts and i need a line which says transforming the .... space. So which space are they into? just give me the answer as i have to copy and paste . the answer should be like transforming <answer> space. give me couple of options. Also the answer have to be all lower case, please add comma after every answer`;
+
+    const result = await clientOpenAiSpecificThing.responses.create({
+      model: "gpt-4o-mini",
+      input: prompt,
+    });
+    const data = result.output_text;
+    res.json(result.output_text);
+    console.log(`openAi response`, data);
+  } catch (error) {
+    console.error(error.message);
   }
 });
 
 //////////////////#2. Chat gpt////////////////////////
 const clientOpenAi = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY?.replace(/\s+/g, ""),
 });
 
 app.post("/generateOpenAi", async (req, res) => {
   try {
+    console.log("OPENAI key exists:", !!process.env.OPENAI_API_KEY);
+    console.log("OPENAI key raw:", JSON.stringify(process.env.OPENAI_API_KEY));
+    console.log("OPENAI key length:", process.env.OPENAI_API_KEY?.length);
     const employeeList = req.body.employeeList;
     const emailFormat = req.body.emailFormat;
     console.log(`employeeList`, employeeList);
@@ -94,7 +122,7 @@ app.post("/validateNeverBounce", async (req, res) => {
 ///////////////////OpenAi - fristName///////////////
 
 const clientOpenAi2 = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY?.replace(/\s+/g, ""),
 });
 
 app.post("/generateOpenAiFirstName", async (req, res) => {
@@ -118,29 +146,29 @@ app.post("/generateOpenAiFirstName", async (req, res) => {
 
 ///////////////////OpenAi - fristName///////////////
 
-const clientOpenAi3 = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// const clientOpenAi3 = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
 
-app.post("/generateOpenAiFirstName", async (req, res) => {
-  try {
-    const { employeesList } = req.body;
+// app.post("/generateOpenAiFirstName", async (req, res) => {
+//   try {
+//     const { employeesList } = req.body;
 
-    console.log(`employeeList`, employeesList);
-    const prompt = `For this employees- ${employeesList} please give me their First Name. Just the First Name nothing else, so its every easy to copy and paste`;
-    const result = await clientOpenAi3.responses.create({
-      model: "gpt-4o-mini",
-      input: prompt,
-    });
-    const data = result.output_text;
+//     console.log(`employeeList`, employeesList);
+//     const prompt = `For this employees- ${employeesList} please give me their First Name. Just the First Name nothing else, so its every easy to copy and paste`;
+//     const result = await clientOpenAi3.responses.create({
+//       model: "gpt-4o-mini",
+//       input: prompt,
+//     });
+//     const data = result.output_text;
 
-    console.log(`openAi Frist Name response`, data);
-    res.json(data);
-  } catch (error) {
-    console.error(error.message);
-  }
-});
+//     console.log(`openAi Frist Name response`, data);
+//     res.json(data);
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// });
 
 app.listen(port, () => {
-  //   console.log(`server running on ${port}`);
+  console.log(`server running on ${port}`);
 });

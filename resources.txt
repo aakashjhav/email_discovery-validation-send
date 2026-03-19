@@ -4,3 +4,15 @@ based on thsi please create email for the following employees in the graphql win
 who is the hiring manager for this. please check online
 
 So this is the about of cutover, if i have to tell  that they are transforming ___ space. what would that be. just one or two words
+
+====specifc thing===
+
+so this is the about of a company 
+
+(At Konnect, we believe HR should be both strategic and human-centered. As a fractional and outsourced HR partner, we help businesses of all sizes build scalable, compliant, and people-focused operations — without the overhead of a full-time team. From hiring and onboarding to compliance, performance management, and culture development, we take HR off your plate so you can focus on growth. But we don’t stop there. We've also launched a groundbreaking AI-powered HR platform that simplifies processes, surfaces real-time insights, and automates repetitive tasks — all while staying true to our mission of “Keeping HR Human.” With the right blend of expertise and innovation, we empower organizations to create workplaces where people and businesses thrive.)
+
+ i am doing reachouts and i need a line which says transforming the .... space. So which space are they into? just give me the answer as i have to copy and paste . the answer should be like transforming <answer> space. give me couple of options
+
+
+
+http://localhost:3000/
